@@ -34,5 +34,6 @@ namespace Tenanpp.Models
         }
 
         public DbSet<Inmobiliaria> Inmobiliarias { get; set; }
+        public DbSet<OpinionInmobiliaria> OpinionesInmobiliarias { get; set; }
     }
 }

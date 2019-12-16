@@ -49,7 +49,7 @@ namespace Tenanpp.Controllers
         {
             if (inmobiliaria == null)
             {
-                return BadRequest("Employee is null.");
+                return BadRequest("No se enviaron datos");
             }
  
             _dataRepository.Add(inmobiliaria);
@@ -65,13 +65,13 @@ namespace Tenanpp.Controllers
         {
             if (inmobiliaria == null)
             {
-                return BadRequest("Employee is null.");
+                return BadRequest("No se enviaron datos");
             }
  
             Inmobiliaria inmobiliariaToUpdate = _dataRepository.Get(id);
             if (inmobiliariaToUpdate == null)
             {
-                return NotFound("The Employee record couldn't be found.");
+                return NotFound("No se pudo encontrar la inmobiliaria");
             }
  
             _dataRepository.Update(inmobiliariaToUpdate, inmobiliaria);
@@ -85,7 +85,7 @@ namespace Tenanpp.Controllers
             Inmobiliaria inmobiliaria = _dataRepository.Get(id);
             if (inmobiliaria == null)
             {
-                return NotFound("The Employee record couldn't be found.");
+                return NotFound("No se pudo encontrar la inmobiliaria");
             }
  
             _dataRepository.Delete(inmobiliaria);

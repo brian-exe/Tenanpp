@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tenanpp.Models;
 
 namespace dotnet_app.Migrations
 {
     [DbContext(typeof(TenanppContext))]
-    partial class TenanppContextModelSnapshot : ModelSnapshot
+    [Migration("20191216025652_OpinionInmobiliariaCreated")]
+    partial class OpinionInmobiliariaCreated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
