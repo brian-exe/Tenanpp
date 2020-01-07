@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Tenanpp.Models.Repository;
+using System.Threading.Tasks;
+using System.Threading;
+using Microsoft.EntityFrameworkCore;
  
 namespace Tenanpp.Models.DataManager
 {
@@ -13,24 +16,25 @@ namespace Tenanpp.Models.DataManager
             _tenanppContext = context;
         }
  
-        public IEnumerable<Inmobiliaria> GetAll()
+        public async Task<IEnumerable<Inmobiliaria>> GetAll()
         {
-            return _tenanppContext.Inmobiliarias.ToList();
+            return await _tenanppContext.Inmobiliarias.ToListAsync();
         }
  
-        public Inmobiliaria Get(long id)
+        public async Task<Inmobiliaria> Get(long id)
         {
-            return _tenanppContext.Inmobiliarias
-                  .FirstOrDefault(i => i.InmobiliariaId == id);
+
+            Thread.Sleep(3000);
+            return await _tenanppContext.Inmobiliarias.FirstOrDefaultAsync(i => i.InmobiliariaId == id);
         }
  
-        public void Add(Inmobiliaria entity)
+        public async Task Add(Inmobiliaria entity)
         {
-            _tenanppContext.Inmobiliarias.Add(entity);
-            _tenanppContext.SaveChanges();
+            await _tenanppContext.Inmobiliarias.AddAsync(entity);
+            await _tenanppContext.SaveChangesAsync();
         }
  
-        public void Update(Inmobiliaria inmobiliaria, Inmobiliaria entity)
+        public async Task Update(Inmobiliaria inmobiliaria, Inmobiliaria entity)
         {
             inmobiliaria.Nombre = entity.Nombre;
             inmobiliaria.Direccion = entity.Direccion;
@@ -38,13 +42,13 @@ namespace Tenanpp.Models.DataManager
             inmobiliaria.Telefono = entity.Telefono;
             inmobiliaria.Cuit = entity.Cuit;
             inmobiliaria.Url = entity.Url;
-            _tenanppContext.SaveChanges();
+            await _tenanppContext.SaveChangesAsync();
         }
  
-        public void Delete(Inmobiliaria inmobiliaria)
+        public async Task Delete(Inmobiliaria inmobiliaria)
         {
             _tenanppContext.Inmobiliarias.Remove(inmobiliaria);
-            _tenanppContext.SaveChanges();
+            await _tenanppContext.SaveChangesAsync();
         }
     }
 }
