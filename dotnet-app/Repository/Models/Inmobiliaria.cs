@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Tenanpp.Models{
+namespace Tenanpp.Repository.Models{
     public class Inmobiliaria {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

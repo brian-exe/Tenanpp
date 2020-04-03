@@ -11,9 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
-using Tenanpp.Models;
-using Tenanpp.Models.Repository;
-using Tenanpp.Models.DataManager;
+using Tenanpp.Core;
+using Tenanpp.Repository;
+using Tenanpp.Repository.Models;
 
 namespace dotnet_app
 {
@@ -30,7 +30,8 @@ namespace dotnet_app
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<TenanppContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:TenanppDB"]));
-            services.AddScoped<IDataRepository<Inmobiliaria>, InmobiliariaManager>();
+            //services.AddScoped<IRepository<Inmobiliaria>, InmobiliariaRepository>();
+            services.AddScoped<IInmobiliariaRepository, InmobiliariaRepository>();
             services.AddControllers();
         }
 

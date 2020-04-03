@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Tenanpp.Models;
-using Tenanpp.Models.Repository;
-using Tenanpp.Models.DataManager;
+using Tenanpp.Repository;
+using Tenanpp.Core;
+using Tenanpp.Repository.Models;
 
 namespace Tenanpp.Controllers
 {
@@ -14,9 +14,9 @@ namespace Tenanpp.Controllers
     [ApiController]
     public class InmobiliariaController : ControllerBase
     {
-        private readonly IDataRepository<Inmobiliaria> _dataRepository;
+        private readonly IInmobiliariaRepository _dataRepository;
  
-        public InmobiliariaController(IDataRepository<Inmobiliaria> dataRepository)
+        public InmobiliariaController(IInmobiliariaRepository dataRepository)
         {
             _dataRepository = dataRepository;
         }

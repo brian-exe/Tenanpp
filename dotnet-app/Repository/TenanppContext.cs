@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-
-namespace Tenanpp.Models
+using Tenanpp.Repository.Models;
+namespace Tenanpp.Repository
 {
     public class TenanppContext : DbContext
     {
