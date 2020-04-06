@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Tenanpp.Repository;
-using Tenanpp.Core;
+using Tenanpp.Core.Service;
 using Tenanpp.Repository.Models;
 
 namespace Tenanpp.Controllers
@@ -14,18 +14,18 @@ namespace Tenanpp.Controllers
     [ApiController]
     public class InmobiliariaController : ControllerBase
     {
-        private readonly IInmobiliariaRepository _dataRepository;
+        private readonly IBaseService<Inmobiliaria> _service;
  
-        public InmobiliariaController(IInmobiliariaRepository dataRepository)
+        public InmobiliariaController(IBaseService<Inmobiliaria> service)
         {
-            _dataRepository = dataRepository;
+            _service = service;
         }
  
         // GET: api/Employee
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            IEnumerable<Inmobiliaria> inmobiliarias = await _dataRepository.GetAll();
+            IEnumerable<Inmobiliaria> inmobiliarias = await _service.GetAll();
             return Ok(inmobiliarias);
         }
  
@@ -33,7 +33,7 @@ namespace Tenanpp.Controllers
         [HttpGet("{id}", Name = "Get")]
         public async Task<IActionResult> Get(long id)
         {
-            Inmobiliaria inmobiliaria = await _dataRepository.Get(id);
+            Inmobiliaria inmobiliaria = await _service.Get(id);
  
             if (inmobiliaria == null)
             {
@@ -43,53 +43,53 @@ namespace Tenanpp.Controllers
             return Ok(inmobiliaria);
         }
  
-        // POST: api/Employee
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Inmobiliaria inmobiliaria)
-        {
-            if (inmobiliaria == null)
-            {
-                return BadRequest("No se enviaron datos");
-            }
+        // // POST: api/Employee
+        // [HttpPost]
+        // public async Task<IActionResult> Post([FromBody] Inmobiliaria inmobiliaria)
+        // {
+        //     if (inmobiliaria == null)
+        //     {
+        //         return BadRequest("No se enviaron datos");
+        //     }
  
-            await _dataRepository.Add(inmobiliaria);
-            return CreatedAtRoute(
-                  "Get", 
-                  new { Id = inmobiliaria.InmobiliariaId },
-                  inmobiliaria);
-        }
+        //     await _service.Add(inmobiliaria);
+        //     return CreatedAtRoute(
+        //           "Get", 
+        //           new { Id = inmobiliaria.InmobiliariaId },
+        //           inmobiliaria);
+        // }
  
-        // PUT: api/Employee/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put(long id, [FromBody] Inmobiliaria inmobiliaria)
-        {
-            if (inmobiliaria == null)
-            {
-                return BadRequest("No se enviaron datos");
-            }
+        // // PUT: api/Employee/5
+        // [HttpPut("{id}")]
+        // public async Task<IActionResult> Put(long id, [FromBody] Inmobiliaria inmobiliaria)
+        // {
+        //     if (inmobiliaria == null)
+        //     {
+        //         return BadRequest("No se enviaron datos");
+        //     }
  
-            Inmobiliaria inmobiliariaToUpdate = await _dataRepository.Get(id);
-            if (inmobiliariaToUpdate == null)
-            {
-                return NotFound("No se pudo encontrar la inmobiliaria");
-            }
+        //     Inmobiliaria inmobiliariaToUpdate = await _service.Get(id);
+        //     if (inmobiliariaToUpdate == null)
+        //     {
+        //         return NotFound("No se pudo encontrar la inmobiliaria");
+        //     }
  
-            await _dataRepository.Update(inmobiliariaToUpdate, inmobiliaria);
-            return NoContent();
-        }
+        //     await _service.Update(inmobiliariaToUpdate, inmobiliaria);
+        //     return NoContent();
+        // }
  
-        // DELETE: api/Employee/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(long id)
-        {
-            Inmobiliaria inmobiliaria = await _dataRepository.Get(id);
-            if (inmobiliaria == null)
-            {
-                return NotFound("No se pudo encontrar la inmobiliaria");
-            }
+        // // DELETE: api/Employee/5
+        // [HttpDelete("{id}")]
+        // public async Task<IActionResult> Delete(long id)
+        // {
+        //     Inmobiliaria inmobiliaria = await _service.Get(id);
+        //     if (inmobiliaria == null)
+        //     {
+        //         return NotFound("No se pudo encontrar la inmobiliaria");
+        //     }
  
-            await _dataRepository.Delete(inmobiliaria);
-            return NoContent();
-        }
+        //     await _service.Delete(inmobiliaria);
+        //     return NoContent();
+        // }
     }
 }

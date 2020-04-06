@@ -26,27 +26,17 @@ namespace Tenanpp.Repository
             return await _context.Set<TEntity>().FindAsync(id);
         }
  
-        public async Task Add(TEntity entity)
-        {
-            await _context.Set<TEntity>().AddAsync(entity);
-            await _context.SaveChangesAsync();
-        }
- 
-        // public async Task Update(Inmobiliaria inmobiliaria, Inmobiliaria entity)
+        // public async Task Add(TEntity entity)
         // {
-        //     inmobiliaria.Nombre = entity.Nombre;
-        //     inmobiliaria.Direccion = entity.Direccion;
-        //     inmobiliaria.Localidad = entity.Localidad;
-        //     inmobiliaria.Telefono = entity.Telefono;
-        //     inmobiliaria.Cuit = entity.Cuit;
-        //     inmobiliaria.Url = entity.Url;
-        //     await _tenanppContext.SaveChangesAsync();
+        //     await _context.Set<TEntity>().AddAsync(entity);
+        //     await _context.SaveChangesAsync();
         // }
  
-        public async Task Delete(TEntity entity)
-        {
-            _context.Set<TEntity>().Remove(entity);
-            await _context.SaveChangesAsync();
-        }
+        // public async Task Delete(TEntity entity)
+        // {
+        //     return _context.Set<TEntity>().Remove(entity);
+        //     //await _context.SaveChangesAsync();
+        // }
+
     }
 }

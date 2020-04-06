@@ -6,8 +6,7 @@ namespace Tenanpp.Core{
         {
             Task<IEnumerable<TEntity>> GetAll();
             Task<TEntity> Get(long id);
-            Task Add(TEntity entity);
-            //Task Update(TEntity dbEntity, TEntity entity);
-            Task Delete(TEntity entity);
+            // Task Add(TEntity entity);
+            // Task Delete(TEntity entity);
         }
 }
