@@ -1,0 +1,31 @@
+{
+    "inmobiliarias": [
+        {
+            "InmobiliariaId": 1,
+            "Nombre": "Remax",
+            "Direccion": "Avellaneda 1258",
+            "Telefono": "011 49681336",
+            "Localidad": "Capital Federeal",
+            "Cuit": "30-369871223-1",
+            "Url": "https://www.remax.com"
+        },
+        {
+            "InmobiliariaId": 2,
+            "Nombre": "Remax",
+            "Direccion": "Avellaneda 1258",
+            "Telefono": "011 49681336",
+            "Localidad": "Capital Federal",
+            "Cuit": "30-369871223-1",
+            "Url": "https://www.remax.com"
+        },
+        {
+            "InmobiliariaId": 3,
+            "Nombre": "Remax",
+            "Direccion": "Avellaneda 1258",
+            "Telefono": "011 49681336",
+            "Localidad": "Capital Federeal",
+            "Cuit": "30-369871223-1",
+            "Url": "https://www.remax.com"
+        }
+    ]
+}
