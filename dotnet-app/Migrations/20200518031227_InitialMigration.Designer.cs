@@ -10,8 +10,8 @@ using Tenanpp.Repository;
 namespace dotnet_app.Migrations
 {
     [DbContext(typeof(TenanppContext))]
-    [Migration("20191216025652_OpinionInmobiliariaCreated")]
-    partial class OpinionInmobiliariaCreated
+    [Migration("20200518031227_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,9 +21,9 @@ namespace dotnet_app.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Tenanpp.Models.Inmobiliaria", b =>
+            modelBuilder.Entity("Tenanpp.Repository.Models.Inmobiliaria", b =>
                 {
-                    b.Property<long>("InmobiliariaId")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -40,47 +40,34 @@ namespace dotnet_app.Migrations
                     b.Property<string>("Nombre")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PathFoto")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Telefono")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Url")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("InmobiliariaId");
+                    b.HasKey("Id");
 
                     b.ToTable("Inmobiliarias");
-
-                    b.HasData(
-                        new
-                        {
-                            InmobiliariaId = 1L,
-                            Cuit = "30-5212367-12",
-                            Direccion = "Directorio 3456",
-                            Localidad = "Capital Federal",
-                            Nombre = "Lepore",
-                            Telefono = "011 44339820",
-                            Url = "https://www.lepore.com.ar"
-                        },
-                        new
-                        {
-                            InmobiliariaId = 2L,
-                            Cuit = "30-278901500-33",
-                            Direccion = "Rivadavia 9876",
-                            Localidad = "Capital Federal",
-                            Nombre = "Juan Propiedades",
-                            Telefono = "011 4468 9320",
-                            Url = ""
-                        });
                 });
 
-            modelBuilder.Entity("Tenanpp.Models.OpinionInmobiliaria", b =>
+            modelBuilder.Entity("Tenanpp.Repository.Models.OpinionInmobiliaria", b =>
                 {
-                    b.Property<int>("OpinionInmobiliariaId")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Comentario")
+                    b.Property<bool>("AceptaPagoElectronico")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ComentarioNegativo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ComentarioPositivo")
                         .HasColumnType("nvarchar(500)")
                         .HasMaxLength(500);
 
@@ -93,19 +80,25 @@ namespace dotnet_app.Migrations
                     b.Property<string>("IpOrigen")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Valoracion")
+                    b.Property<int>("ValoracionAtencion")
                         .HasColumnType("int");
 
-                    b.HasKey("OpinionInmobiliariaId");
+                    b.Property<int>("ValoracionConductaEtica")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ValoracionResponsabilidad")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("InmobiliariaId");
 
                     b.ToTable("OpinionesInmobiliarias");
                 });
 
-            modelBuilder.Entity("Tenanpp.Models.OpinionInmobiliaria", b =>
+            modelBuilder.Entity("Tenanpp.Repository.Models.OpinionInmobiliaria", b =>
                 {
-                    b.HasOne("Tenanpp.Models.Inmobiliaria", "Inmobiliaria")
+                    b.HasOne("Tenanpp.Repository.Models.Inmobiliaria", "Inmobiliaria")
                         .WithMany()
                         .HasForeignKey("InmobiliariaId")
                         .OnDelete(DeleteBehavior.Cascade)

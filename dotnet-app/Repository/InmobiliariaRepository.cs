@@ -16,7 +16,7 @@ namespace Tenanpp.Repository
         
         public override async Task<Inmobiliaria> Get(long id)
         {
-            return await TenanppContext.Inmobiliarias.FirstOrDefaultAsync(i => i.InmobiliariaId == id);
+            return await TenanppContext.Inmobiliarias.FirstOrDefaultAsync(i => i.Id == id);
         }
  
         private TenanppContext TenanppContext

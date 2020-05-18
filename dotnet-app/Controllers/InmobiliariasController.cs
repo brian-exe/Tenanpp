@@ -12,7 +12,7 @@ namespace Tenanpp.Controllers
 {
     [Route("api/inmobiliarias")]
     [ApiController]
-    public class InmobiliariaController : ControllerBase
+    public class InmobiliariaController : Controller
     {
         private readonly IBaseService<Inmobiliaria> _service;
  
@@ -41,6 +41,13 @@ namespace Tenanpp.Controllers
             }
  
             return Ok(inmobiliaria);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if(disposing && _service != null)
+                _service.Dispose();
+            base.Dispose(disposing);
         }
  
         // // POST: api/Employee
