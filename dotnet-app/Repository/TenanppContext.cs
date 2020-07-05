@@ -16,5 +16,6 @@ namespace Tenanpp.Repository
         public DbSet<Inmobiliaria> Inmobiliarias { get; set; }
         public DbSet<OpinionInmobiliaria> OpinionesInmobiliarias { get; set; }
         public DbSet<ValoracionInmobiliaria> ValoracionesInmobiliarias { get; set; }
+        public DbSet<FotoPerfil> FotosPerfil { get; set; }
     }
 }
