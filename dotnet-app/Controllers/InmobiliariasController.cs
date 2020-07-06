@@ -1,13 +1,9 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Tenanpp.Repository;
 using Tenanpp.Core.Service;
 using Tenanpp.Repository.Models;
-
+using Tenanpp.ApiResponse;
 namespace Tenanpp.Controllers
 {
     [Route("api/inmobiliarias")]
@@ -26,7 +22,7 @@ namespace Tenanpp.Controllers
         public async Task<IActionResult> Get()
         {
             IEnumerable<Inmobiliaria> inmobiliarias = await _service.GetAll();
-            return Ok(inmobiliarias);
+            return Ok( new OkApiResponse(inmobiliarias));
         }
  
         // GET: api/Employee/5
@@ -37,10 +33,10 @@ namespace Tenanpp.Controllers
  
             if (inmobiliaria == null)
             {
-                return NotFound("No se encontró Inmobiliaria");
+                return NotFound( new NotFoundApiResponse("No se encontró Inmobiliaria"));
             }
  
-            return Ok(inmobiliaria);
+            return Ok(new OkApiResponse(inmobiliaria));
         }
 
         protected override void Dispose(bool disposing)
