@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Tenanpp.ApiResponse
+namespace Tenanpp.ApiResponses
 {
     public class ApiResponse
     {

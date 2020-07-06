@@ -40,6 +40,8 @@ namespace dotnet_app
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseStatusCodePagesWithReExecute("/error/{0}");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -50,6 +52,8 @@ namespace dotnet_app
             app.UseRouting();
 
             app.UseAuthorization();
+            
+            //app.UseExceptionHandler("/error/500");
 
             app.UseEndpoints(endpoints =>
             {

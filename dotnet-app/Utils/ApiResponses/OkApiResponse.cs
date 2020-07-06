@@ -1,6 +1,6 @@
 using System.Net;
 
-namespace Tenanpp.ApiResponse
+namespace Tenanpp.ApiResponses
 {
     public class OkApiResponse : ApiResponse
     {

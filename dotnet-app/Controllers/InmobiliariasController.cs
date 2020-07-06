@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Tenanpp.Core.Service;
 using Tenanpp.Repository.Models;
-using Tenanpp.ApiResponse;
+using Tenanpp.ApiResponses;
 namespace Tenanpp.Controllers
 {
     [Route("api/inmobiliarias")]
