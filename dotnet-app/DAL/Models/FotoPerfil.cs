@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Tenanpp.Repository.Models{
+namespace Tenanpp.DAL.Models{
     public class FotoPerfil {
         public long Id { get; set; }
         [ForeignKey("Inmobiliaria")]

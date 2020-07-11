@@ -1,23 +1,24 @@
 using Tenanpp.Core.Service;
-using Tenanpp.Core;
-using Tenanpp.Repository;
+using Tenanpp.DAL;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Tenanpp.Services{
     public class BaseService<TEntity>: IBaseService<TEntity> where TEntity :class{
 
-        private protected UnitOfWork _unitOfWork;
+        private protected TenanppContext _context;
 
         public BaseService(TenanppContext context)
         {
-            _unitOfWork = new UnitOfWork(context);
+            _context = context;
         }
-        public virtual Task<IEnumerable<TEntity>> GetAll(){
-            throw new System.NotImplementedException();
+        public async Task<List<TEntity>> GetAll(){
+            return await _context.Set<TEntity>().ToListAsync();
         }
-        public virtual Task<TEntity> Get(long id){
-            throw new System.NotImplementedException();
+        public async Task<TEntity> GetById(long id){
+            return await _context.Set<TEntity>().FindAsync(id);
         }
         // public virtual Task<int> Add(TEntity entity){
         //     throw new System.NotImplementedException();
@@ -29,8 +30,20 @@ namespace Tenanpp.Services{
         //     throw new System.NotImplementedException();
         //}
 
+         
+        // public async Task Add(TEntity entity)
+        // {
+        //     await _context.Set<TEntity>().AddAsync(entity);
+        //     await _context.SaveChangesAsync();
+        // }
+ 
+        // public async Task Delete(TEntity entity)
+        // {
+        //     return _context.Set<TEntity>().Remove(entity);
+        //     //await _context.SaveChangesAsync();
+        // }
         public void Dispose(){
-            _unitOfWork.Dispose();
+            _context.Dispose();
         }
     }
 }

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Tenanpp.Core.Service;
-using Tenanpp.Repository.Models;
+using Tenanpp.DAL.Models;
 using Tenanpp.ApiResponses;
 namespace Tenanpp.Controllers
 {
@@ -10,9 +10,9 @@ namespace Tenanpp.Controllers
     [ApiController]
     public class InmobiliariaController : Controller
     {
-        private readonly IBaseService<Inmobiliaria> _service;
+        private readonly IInmobiliariaService<Inmobiliaria> _service;
  
-        public InmobiliariaController(IBaseService<Inmobiliaria> service)
+        public InmobiliariaController(IInmobiliariaService<Inmobiliaria> service)
         {
             _service = service;
         }
@@ -25,11 +25,10 @@ namespace Tenanpp.Controllers
             return Ok( new OkApiResponse(inmobiliarias));
         }
  
-        // GET: api/Employee/5
         [HttpGet("{id}", Name = "Get")]
         public async Task<IActionResult> Get(long id)
         {
-            Inmobiliaria inmobiliaria = await _service.Get(id);
+            Inmobiliaria inmobiliaria = await _service.GetById(id);
  
             if (inmobiliaria == null)
             {
@@ -37,6 +36,19 @@ namespace Tenanpp.Controllers
             }
  
             return Ok(new OkApiResponse(inmobiliaria));
+        }
+
+        [Route("/image/{id}")]
+        [HttpGet]
+        public async Task<IActionResult> getProductImage(int id)
+        {
+            FotoPerfil foto = await _service.GetFoto(id);
+            if (foto == null)
+            {
+                return NotFound( new NotFoundApiResponse("No se encontró foto"));
+            }
+            //return Ok(new OkApiResponse(inmobiliaria));
+            return File(foto.Data, "image/png", "");
         }
 
         protected override void Dispose(bool disposing)

@@ -1,20 +1,20 @@
-using Tenanpp.Repository.Models;
-using Tenanpp.Repository;
+using Tenanpp.DAL.Models;
+using Tenanpp.DAL;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using Tenanpp.Core.Service;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Tenanpp.Services{
-    public class InmobiliariaService : BaseService<Inmobiliaria>{
+    public class InmobiliariaService : BaseService<Inmobiliaria>, IInmobiliariaService<Inmobiliaria>{
 
         public InmobiliariaService(TenanppContext context): base(context)
         {
         }
 
-        public override Task<IEnumerable<Inmobiliaria>> GetAll(){
-            return _unitOfWork.Inmobiliarias.GetAll();
-        }
-        public async override Task<Inmobiliaria> Get(long id){
-            return await _unitOfWork.Inmobiliarias.Get(id);
+        public async Task<FotoPerfil> GetFoto(int id){
+            return await _context.FotosPerfil.Where(f => f.InmobiliariaId ==id).FirstOrDefaultAsync();
         }
         // public async override Task<int> Add(Inmobiliaria entity){
         //     await _unitOfWork.Inmobiliarias.Add(entity);

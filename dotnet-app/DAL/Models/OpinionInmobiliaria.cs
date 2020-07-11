@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System;
 
-namespace Tenanpp.Repository.Models{
+namespace Tenanpp.DAL.Models{
 
     public class OpinionInmobiliaria{
         [Key]
