@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Tenanpp.Core.Service;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Tenanpp.Models.Queries;
 
 namespace Tenanpp.Services{
     public class InmobiliariaService : BaseService<Inmobiliaria>, IInmobiliariaService<Inmobiliaria>{
@@ -15,6 +16,15 @@ namespace Tenanpp.Services{
 
         public async Task<FotoPerfil> GetFoto(int id){
             return await _context.FotosPerfil.Where(f => f.InmobiliariaId ==id).FirstOrDefaultAsync();
+        }
+
+        public async Task<List<Inmobiliaria>> Get(GetInmobiliariasQuery parameters){
+            int skip = (parameters.PageNumber - 1) * parameters.PageSize;
+            return await _context.Inmobiliarias
+                    .Take(parameters.PageSize)
+                    .Skip(skip)
+                    .OrderBy(i => i.Id)
+                    .ToListAsync();
         }
         // public async override Task<int> Add(Inmobiliaria entity){
         //     await _unitOfWork.Inmobiliarias.Add(entity);

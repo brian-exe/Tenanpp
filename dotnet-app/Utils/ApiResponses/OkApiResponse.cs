@@ -4,7 +4,6 @@ namespace Tenanpp.ApiResponses
 {
     public class OkApiResponse : ApiResponse
     {
-        public object Data {get;}
         public OkApiResponse(object data)
          :base(200, HttpStatusCode.OK.ToString())
          {

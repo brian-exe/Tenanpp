@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Tenanpp.Core.Service;
 using Tenanpp.DAL.Models;
 using Tenanpp.ApiResponses;
+using Tenanpp.Models.Queries;
+
 namespace Tenanpp.Controllers
 {
     [Route("api/inmobiliarias")]
@@ -17,11 +19,10 @@ namespace Tenanpp.Controllers
             _service = service;
         }
  
-        // GET: api/Employee
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery] GetInmobiliariasQuery parameters)
         {
-            IEnumerable<Inmobiliaria> inmobiliarias = await _service.GetAll();
+            IEnumerable<Inmobiliaria> inmobiliarias = await _service.Get(parameters);
             return Ok( new OkApiResponse(inmobiliarias));
         }
  
@@ -38,16 +39,15 @@ namespace Tenanpp.Controllers
             return Ok(new OkApiResponse(inmobiliaria));
         }
 
-        [Route("/image/{id}")]
+        [Route("image/{id}")]
         [HttpGet]
-        public async Task<IActionResult> getProductImage(int id)
+        public async Task<IActionResult> GetInmobiliariaImage(int id)
         {
             FotoPerfil foto = await _service.GetFoto(id);
             if (foto == null)
             {
                 return NotFound( new NotFoundApiResponse("No se encontró foto"));
             }
-            //return Ok(new OkApiResponse(inmobiliaria));
             return File(foto.Data, "image/png", "");
         }
 
