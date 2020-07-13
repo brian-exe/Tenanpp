@@ -1,20 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Tenanpp.Core;
 using Tenanpp.DAL;
-using Tenanpp.DAL.Models;
 using Tenanpp.Core.Service;
 using Tenanpp.Services;
+using AutoMapper;
 
 namespace dotnet_app
 {
@@ -31,8 +24,9 @@ namespace dotnet_app
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<TenanppContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:TenanppDB"]));
-            //services.AddScoped<IRepository<Inmobiliaria>, InmobiliariaRepository>();
-            services.AddScoped<IInmobiliariaService<Inmobiliaria>, InmobiliariaService>();
+            services.AddScoped<IInmobiliariaService, InmobiliariaService>();
+            services.AddScoped<IOpinionInmobiliariaService, OpinionInmobiliariaService >();
+            services.AddAutoMapper(typeof(Startup));
             services.AddControllers();
         }
 

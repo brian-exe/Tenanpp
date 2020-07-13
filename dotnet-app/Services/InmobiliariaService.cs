@@ -6,11 +6,12 @@ using Tenanpp.Core.Service;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Tenanpp.Models.Queries;
+using AutoMapper;
 
 namespace Tenanpp.Services{
-    public class InmobiliariaService : BaseService<Inmobiliaria>, IInmobiliariaService<Inmobiliaria>{
+    public class InmobiliariaService : BaseService<Inmobiliaria>, IInmobiliariaService{
 
-        public InmobiliariaService(TenanppContext context): base(context)
+        public InmobiliariaService(IMapper mapper,TenanppContext context): base(mapper, context)
         {
         }
 
@@ -18,11 +19,11 @@ namespace Tenanpp.Services{
             return await _context.FotosPerfil.Where(f => f.InmobiliariaId ==id).FirstOrDefaultAsync();
         }
 
-        public async Task<List<Inmobiliaria>> Get(GetInmobiliariasQuery parameters){
+        public async Task<List<Inmobiliaria>> Get(PaginationQuery parameters){
             int skip = (parameters.PageNumber - 1) * parameters.PageSize;
             return await _context.Inmobiliarias
-                    .Take(parameters.PageSize)
                     .Skip(skip)
+                    .Take(parameters.PageSize)
                     .OrderBy(i => i.Id)
                     .ToListAsync();
         }

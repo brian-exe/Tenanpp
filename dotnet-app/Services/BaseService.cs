@@ -2,17 +2,18 @@ using Tenanpp.Core.Service;
 using Tenanpp.DAL;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Linq;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 
 namespace Tenanpp.Services{
     public class BaseService<TEntity>: IBaseService<TEntity> where TEntity :class{
 
         private protected TenanppContext _context;
-
-        public BaseService(TenanppContext context)
+        private protected IMapper _mapper;
+        public BaseService(IMapper mapper, TenanppContext context)
         {
             _context = context;
+            _mapper = mapper;
         }
         public async Task<List<TEntity>> GetAll(){
             return await _context.Set<TEntity>().ToListAsync();

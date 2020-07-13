@@ -5,9 +5,9 @@ using Tenanpp.DAL.Models;
 using Tenanpp.Models.Queries;
 
 namespace Tenanpp.Core.Service {
-    public interface IInmobiliariaService<TEntity>: IBaseService<TEntity>
-                where TEntity : class  {
+    public interface IInmobiliariaService: IBaseService<Inmobiliaria>
+    {
         Task<FotoPerfil> GetFoto(int id);
-        Task<List<Inmobiliaria>> Get(GetInmobiliariasQuery parameters);
+        Task<List<Inmobiliaria>> Get(PaginationQuery parameters);
     }
 }

@@ -5,7 +5,7 @@ using System;
 
 namespace Tenanpp.DAL.Models{
 
-    public class OpinionInmobiliaria{
+    public class OpinionInmobiliaria : BaseEntity{
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }

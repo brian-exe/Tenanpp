@@ -12,15 +12,15 @@ namespace Tenanpp.Controllers
     [ApiController]
     public class InmobiliariaController : Controller
     {
-        private readonly IInmobiliariaService<Inmobiliaria> _service;
+        private readonly IInmobiliariaService _service;
  
-        public InmobiliariaController(IInmobiliariaService<Inmobiliaria> service)
+        public InmobiliariaController(IInmobiliariaService service)
         {
             _service = service;
         }
  
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] GetInmobiliariasQuery parameters)
+        public async Task<IActionResult> Get([FromQuery] PaginationQuery parameters)
         {
             IEnumerable<Inmobiliaria> inmobiliarias = await _service.Get(parameters);
             return Ok( new OkApiResponse(inmobiliarias));
