@@ -1,0 +1,8 @@
+INSERT INTO Inmobiliarias (Nombre,Direccion,Telefono,Localidad,Cuit,Url)
+VALUES ('M. RiSSO S.R.L','José Andrés Pacheco de Melo 1875','011 4801-6416','Capital Federal','33-70837232-9','https://www.mrisso.com/');
+
+INSERT INTO Inmobiliarias (Nombre,Direccion,Telefono,Localidad,Cuit,Url)
+VALUES ('M. RiSSO S.R.L','José Andrés Pacheco de Melo 1875','011 4801-6416','Capital Federal','33-70837232-9','https://www.mrisso.com/');
+
+INSERT INTO Inmobiliarias (Nombre,Direccion,Telefono,Localidad,Cuit,Url)
+VALUES ('Baigún Operaciones Inmobiliarias','Av. Santa Fe 2125','011 4821-1100','Capital Federal','30-71518463-6','https://www.baigun.com.ar/');

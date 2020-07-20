@@ -10,8 +10,8 @@ using Tenanpp.DAL;
 namespace dotnet_app.Migrations
 {
     [DbContext(typeof(TenanppContext))]
-    [Migration("20200629052014_FotosPerfil_Added")]
-    partial class FotosPerfil_Added
+    [Migration("20200719231608_Initial Migration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace dotnet_app.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Tenanpp.Repository.Models.FotoPerfil", b =>
+            modelBuilder.Entity("Tenanpp.DAL.Models.FotoPerfil", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -42,7 +42,7 @@ namespace dotnet_app.Migrations
                     b.ToTable("FotosPerfil");
                 });
 
-            modelBuilder.Entity("Tenanpp.Repository.Models.Inmobiliaria", b =>
+            modelBuilder.Entity("Tenanpp.DAL.Models.Inmobiliaria", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -72,7 +72,7 @@ namespace dotnet_app.Migrations
                     b.ToTable("Inmobiliarias");
                 });
 
-            modelBuilder.Entity("Tenanpp.Repository.Models.OpinionInmobiliaria", b =>
+            modelBuilder.Entity("Tenanpp.DAL.Models.OpinionInmobiliaria", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -83,11 +83,12 @@ namespace dotnet_app.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("ComentarioNegativo")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(1200)")
+                        .HasMaxLength(1200);
 
                     b.Property<string>("ComentarioPositivo")
-                        .HasColumnType("nvarchar(500)")
-                        .HasMaxLength(500);
+                        .HasColumnType("nvarchar(1200)")
+                        .HasMaxLength(1200);
 
                     b.Property<DateTime>("FechaOpinion")
                         .HasColumnType("datetime2");
@@ -114,50 +115,9 @@ namespace dotnet_app.Migrations
                     b.ToTable("OpinionesInmobiliarias");
                 });
 
-            modelBuilder.Entity("Tenanpp.Repository.Models.ValoracionInmobiliaria", b =>
+            modelBuilder.Entity("Tenanpp.DAL.Models.OpinionInmobiliaria", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<long>("InmobiliariaId")
-                        .HasColumnType("bigint");
-
-                    b.Property<float>("ValoracionAtencion")
-                        .HasColumnType("real");
-
-                    b.Property<float>("ValoracionConductaEtica")
-                        .HasColumnType("real");
-
-                    b.Property<float>("ValoracionResponsabilidad")
-                        .HasColumnType("real");
-
-                    b.Property<float>("VotosAceptaPagoElectronico")
-                        .HasColumnType("real");
-
-                    b.Property<float>("VotosNoAceptaPagoElectronico")
-                        .HasColumnType("real");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("InmobiliariaId");
-
-                    b.ToTable("ValoracionesInmobiliarias");
-                });
-
-            modelBuilder.Entity("Tenanpp.Repository.Models.OpinionInmobiliaria", b =>
-                {
-                    b.HasOne("Tenanpp.Repository.Models.Inmobiliaria", "Inmobiliaria")
-                        .WithMany()
-                        .HasForeignKey("InmobiliariaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Tenanpp.Repository.Models.ValoracionInmobiliaria", b =>
-                {
-                    b.HasOne("Tenanpp.Repository.Models.Inmobiliaria", "Inmobiliaria")
+                    b.HasOne("Tenanpp.DAL.Models.Inmobiliaria", "Inmobiliaria")
                         .WithMany()
                         .HasForeignKey("InmobiliariaId")
                         .OnDelete(DeleteBehavior.Cascade)

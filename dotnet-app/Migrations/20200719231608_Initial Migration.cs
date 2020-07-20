@@ -8,6 +8,21 @@ namespace dotnet_app.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "FotosPerfil",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    InmobiliariaId = table.Column<long>(nullable: false),
+                    Titulo = table.Column<string>(nullable: true),
+                    Data = table.Column<byte[]>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FotosPerfil", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Inmobiliarias",
                 columns: table => new
                 {
@@ -18,8 +33,7 @@ namespace dotnet_app.Migrations
                     Telefono = table.Column<string>(nullable: true),
                     Localidad = table.Column<string>(nullable: true),
                     Cuit = table.Column<string>(nullable: true),
-                    Url = table.Column<string>(nullable: true),
-                    PathFoto = table.Column<string>(nullable: true)
+                    Url = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -36,8 +50,8 @@ namespace dotnet_app.Migrations
                     ValoracionAtencion = table.Column<int>(nullable: false),
                     ValoracionResponsabilidad = table.Column<int>(nullable: false),
                     ValoracionConductaEtica = table.Column<int>(nullable: false),
-                    ComentarioPositivo = table.Column<string>(maxLength: 500, nullable: true),
-                    ComentarioNegativo = table.Column<string>(nullable: true),
+                    ComentarioPositivo = table.Column<string>(maxLength: 1200, nullable: true),
+                    ComentarioNegativo = table.Column<string>(maxLength: 1200, nullable: true),
                     AceptaPagoElectronico = table.Column<bool>(nullable: false),
                     FechaOpinion = table.Column<DateTime>(nullable: false),
                     IpOrigen = table.Column<string>(nullable: true)
@@ -61,6 +75,9 @@ namespace dotnet_app.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "FotosPerfil");
+
             migrationBuilder.DropTable(
                 name: "OpinionesInmobiliarias");
 

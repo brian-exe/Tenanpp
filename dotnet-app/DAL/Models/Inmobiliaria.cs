@@ -13,7 +13,6 @@ namespace Tenanpp.DAL.Models{
         public string Localidad { get; set; }
         public string Cuit { get; set; }
         public string Url { get; set; }
-        //public string PathFoto { get; set; }
     }
 
 }

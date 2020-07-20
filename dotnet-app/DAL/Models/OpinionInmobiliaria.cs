@@ -15,8 +15,11 @@ namespace Tenanpp.DAL.Models{
         public int ValoracionAtencion { get; set; }
         public int ValoracionResponsabilidad { get; set; }
         public int ValoracionConductaEtica { get; set; }
-        [StringLength(500)]
+        
+        [StringLength(1200)]
         public string ComentarioPositivo { get; set; }
+
+        [StringLength(1200)]
         public string ComentarioNegativo { get; set; }
         public bool AceptaPagoElectronico { get; set; }
         public DateTime FechaOpinion { get; set; }

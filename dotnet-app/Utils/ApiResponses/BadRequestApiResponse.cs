@@ -5,12 +5,12 @@ namespace Tenanpp.ApiResponses
     public class BadRequestApiResponse : ApiResponse
     {
         public BadRequestApiResponse()
-         :base(404, HttpStatusCode.BadRequest.ToString())
+         :base(400, HttpStatusCode.BadRequest.ToString())
          {
          }
         
         public BadRequestApiResponse(string message)
-            : base(404, HttpStatusCode.BadRequest.ToString(), message)
+            : base(400, HttpStatusCode.BadRequest.ToString(), message)
         {
         }
     }

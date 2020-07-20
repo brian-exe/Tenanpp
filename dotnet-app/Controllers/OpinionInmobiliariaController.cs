@@ -5,7 +5,9 @@ using Tenanpp.Core.Service;
 using Tenanpp.DAL.Models;
 using Tenanpp.ApiResponses;
 using Tenanpp.Models;
+using Tenanpp.Services;
 using Tenanpp.Models.Queries;
+using AutoMapper;
 
 namespace Tenanpp.Controllers
 {
@@ -14,10 +16,14 @@ namespace Tenanpp.Controllers
     public class OpinionInmobiliariaController : Controller
     {
         private readonly IOpinionInmobiliariaService _service;
+        private readonly IInmobiliariaService _serviceInmo;
+        private protected IMapper _mapper;
  
-        public OpinionInmobiliariaController(IOpinionInmobiliariaService service)
+        public OpinionInmobiliariaController(IInmobiliariaService serviceInmo, IOpinionInmobiliariaService service, IMapper mapper)
         {
+            _serviceInmo = serviceInmo;
             _service = service;
+            _mapper = mapper;
         }
 
          
@@ -30,18 +36,35 @@ namespace Tenanpp.Controllers
         }
 
         [HttpPost("{id}")]
-        public async Task<IActionResult> Post(long id, [FromForm]OpinionInmobiliariaPost opinion){
-            if(!ModelState.IsValid){
-                return BadRequest(new BadRequestApiResponse("Los datos enviados no son correctos"));
+        public async Task<IActionResult> Post(long id, [FromBody]OpinionInmobiliariaPost opinion){
+            Inmobiliaria inmo = await _serviceInmo.GetById(id);
+            if(inmo == null){
+                return BadRequest(new BadRequestApiResponse("No se encontró inmobiliaria con el Id ingresado"));
             }
-            return Ok(new OkApiResponse(HttpContext.Connection.RemoteIpAddress.ToString()));
+
+            var clientIpAddress = HttpContext.Connection.RemoteIpAddress.ToString();
+            if(! await _service.IsPossibleToCreateANewOpinionFor(id, clientIpAddress)){
+                return BadRequest(new BadRequestApiResponse("Ya se detectó otra opinion ingresada en el dia de hoy para la misma inmobiliaria y proveniente de la misma IP"));
+            }
+            opinion.IpOrigen = clientIpAddress;
             
+            OpinionInmobiliaria createdOpinion = await _service.AddOpinionInmobiliaria(id,opinion);
+            if(createdOpinion != null)
+                return Ok(new OkApiResponse(createdOpinion));
+            else
+                return Conflict(new InternalErrorResponse("No se pudo completar la operación"));
         }
 
         protected override void Dispose(bool disposing)
         {
-            if(disposing && _service != null)
-                _service.Dispose();
+            if(disposing ){
+                if(_service != null)
+                    _service.Dispose();
+
+                if(_serviceInmo != null)
+                    _serviceInmo.Dispose();
+            }
+
             base.Dispose(disposing);
         }
     }

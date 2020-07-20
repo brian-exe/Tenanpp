@@ -26,11 +26,24 @@ namespace Tenanpp.Services{
                     .OrderBy(i => i.Id)
                     .ToListAsync();
         }
-/*
+
         public async Task<OpinionInmobiliaria> AddOpinionInmobiliaria(long inmobiliariaId, OpinionInmobiliariaPost model){
             OpinionInmobiliaria newOpinion = _mapper.Map<OpinionInmobiliaria>(model);
             newOpinion.FechaOpinion = DateTime.Today;
-            
-        }*/
+            newOpinion.InmobiliariaId = inmobiliariaId;
+            await _context.OpinionesInmobiliarias.AddAsync(newOpinion);
+            await _context.SaveChangesAsync();
+            return newOpinion;
+        }
+
+        public async Task<bool> IsPossibleToCreateANewOpinionFor(long id, string clientIpAddress){
+            List<OpinionInmobiliaria> result = await _context.OpinionesInmobiliarias
+                    .Where(o => o.InmobiliariaId == id)
+                    .Where(o => o.IpOrigen == clientIpAddress)
+                    .ToListAsync();
+            result = result.Where(o => o.FechaOpinion.Date == DateTime.Today.Date).ToList();
+
+            return result.Count() == 0;
+        }
     }
 }
