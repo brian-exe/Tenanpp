@@ -28,7 +28,7 @@ namespace Tenanpp.Controllers
 
          
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(long id,[FromQuery] PaginationQuery parameters)
+        public async Task<IActionResult> GetOpinionesForInmobiliaria(long id,[FromQuery] OpinionesForInmobiliariaQuery parameters)
         {
             List<OpinionInmobiliaria> opiniones = await _service.GetOpinionesInmobiliaria(id, parameters);
  

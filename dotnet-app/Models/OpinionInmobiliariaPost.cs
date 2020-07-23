@@ -4,6 +4,12 @@ using System.ComponentModel;
 
 namespace Tenanpp.Models{
     public class OpinionInmobiliariaPost{
+
+
+        [Required]
+        [Range(1,5)]
+        public int InmobiliariaId { get; set; }
+
         [Required]
         [Range(1,5)]
         public int ValoracionAtencion { get; set; }

@@ -16,12 +16,16 @@ namespace Tenanpp.Services{
         {
             
         }
-        public async Task<List<OpinionInmobiliaria>> GetOpinionesInmobiliaria(long inmobiliariaId, PaginationQuery parameters){
-
+        public async Task<List<OpinionInmobiliaria>> GetOpinionesInmobiliaria(long inmobiliariaId, OpinionesForInmobiliariaQuery parameters){
             int skip = (parameters.PageNumber - 1) * parameters.PageSize;
-            return await _context.OpinionesInmobiliarias
-                    .Where(o => o.InmobiliariaId == inmobiliariaId)
-                    .Skip(skip)
+
+            IQueryable<OpinionInmobiliaria> query =_context.OpinionesInmobiliarias.Where(o => o.InmobiliariaId == inmobiliariaId);
+            
+            if(parameters.OpinionId !=null){
+                query = query.Where(o => o.Id == parameters.OpinionId);
+            }
+            
+            return await query.Skip(skip)
                     .Take(parameters.PageSize)
                     .OrderBy(i => i.Id)
                     .ToListAsync();
@@ -41,7 +45,7 @@ namespace Tenanpp.Services{
                     .Where(o => o.InmobiliariaId == id)
                     .Where(o => o.IpOrigen == clientIpAddress)
                     .ToListAsync();
-            result = result.Where(o => o.FechaOpinion.Date == DateTime.Today.Date).ToList();
+            result = result.Where(o => o.FechaOpinion.DayOfYear == DateTime.Today.DayOfYear).ToList();
 
             return result.Count() == 0;
         }
