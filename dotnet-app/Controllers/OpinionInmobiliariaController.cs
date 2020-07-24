@@ -30,7 +30,7 @@ namespace Tenanpp.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetOpinionesForInmobiliaria(long id,[FromQuery] OpinionesForInmobiliariaQuery parameters)
         {
-            List<OpinionInmobiliaria> opiniones = await _service.GetOpinionesInmobiliaria(id, parameters);
+            List<OpinionInmobiliariaGet> opiniones = await _service.GetOpinionesInmobiliaria(id, parameters);
  
             return Ok(new OkApiResponse(opiniones));
         }

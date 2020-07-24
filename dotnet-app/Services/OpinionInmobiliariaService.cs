@@ -16,7 +16,7 @@ namespace Tenanpp.Services{
         {
             
         }
-        public async Task<List<OpinionInmobiliaria>> GetOpinionesInmobiliaria(long inmobiliariaId, OpinionesForInmobiliariaQuery parameters){
+        public async Task<List<OpinionInmobiliariaGet>> GetOpinionesInmobiliaria(long inmobiliariaId, OpinionesForInmobiliariaQuery parameters){
             int skip = (parameters.PageNumber - 1) * parameters.PageSize;
 
             IQueryable<OpinionInmobiliaria> query =_context.OpinionesInmobiliarias.Where(o => o.InmobiliariaId == inmobiliariaId);
@@ -25,10 +25,11 @@ namespace Tenanpp.Services{
                 query = query.Where(o => o.Id == parameters.OpinionId);
             }
             
-            return await query.Skip(skip)
+            List<OpinionInmobiliaria> result = await query.Skip(skip)
                     .Take(parameters.PageSize)
                     .OrderBy(i => i.Id)
                     .ToListAsync();
+            return _mapper.Map<List<OpinionInmobiliaria>,List<OpinionInmobiliariaGet>>(result);
         }
 
         public async Task<OpinionInmobiliaria> AddOpinionInmobiliaria(long inmobiliariaId, OpinionInmobiliariaPost model){

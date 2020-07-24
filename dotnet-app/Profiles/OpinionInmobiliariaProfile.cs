@@ -6,5 +6,6 @@ public class OpinionInmobiliariaProfile : Profile
 	public OpinionInmobiliariaProfile()
 	{
 		CreateMap<OpinionInmobiliariaPost, OpinionInmobiliaria>();
+		CreateMap<OpinionInmobiliaria, OpinionInmobiliariaGet>();
 	}
 }
