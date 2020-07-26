@@ -6,13 +6,11 @@ namespace dotnet_app.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            var sp = @"CREATE PROCEDURE EstadisticasInmobiliaria
-                    (
-                        @id INT
-                    ) 
+            var sp = @"CREATE PROCEDURE [dbo].[EstadisticasInmobiliaria] (@id INT) 
                     AS
                     BEGIN
                         SELECT
+                            InmobiliariaId,
                             ROUND(AVG(CAST(ValoracionAtencion AS FLOAT)), 2) AS 'PromedioAtencion',
                             ROUND(AVG(CAST(ValoracionResponsabilidad AS FLOAT)), 2) AS 'PromedioResponsabilidad',
                             ROUND(AVG(CAST(ValoracionConductaEtica AS FLOAT)), 2) AS 'PromedioConductaEtica',
@@ -20,6 +18,7 @@ namespace dotnet_app.Migrations
                             COUNT(CASE WHEN AceptaPagoElectronico = 0 then 1 end) AS 'VotosNoPagoElectronico'
                         FROM [TenanppDB].[dbo].[OpinionesInmobiliarias]
                         WHERE InmobiliariaId = @id
+                        GROUP BY InmobiliariaId
                     END";
 
             migrationBuilder.Sql(sp);

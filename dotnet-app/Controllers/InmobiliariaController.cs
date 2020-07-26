@@ -5,6 +5,7 @@ using Tenanpp.Core.Service;
 using Tenanpp.DAL.Models;
 using Tenanpp.ApiResponses;
 using Tenanpp.Models.Queries;
+using System;
 
 namespace Tenanpp.Controllers
 {
@@ -49,6 +50,15 @@ namespace Tenanpp.Controllers
                 return NotFound( new NotFoundApiResponse("No se encontró foto"));
             }
             return File(foto.Data, "image/png", "");
+        }
+
+
+        [HttpGet("estadisticas/{id}")]
+        public async Task<IActionResult> GetEstadisticasInmobiliaria(long id)
+        {
+            EstadisticasInmobiliaria estadisticas = await _service.GetEstadisticasInmobiliaria(id);
+
+            return Ok(new OkApiResponse(estadisticas));
         }
 
         protected override void Dispose(bool disposing)

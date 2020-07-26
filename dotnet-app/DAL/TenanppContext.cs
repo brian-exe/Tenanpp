@@ -16,5 +16,6 @@ namespace Tenanpp.DAL
         public DbSet<Inmobiliaria> Inmobiliarias { get; set; }
         public DbSet<OpinionInmobiliaria> OpinionesInmobiliarias { get; set; }
         public DbSet<FotoPerfil> FotosPerfil { get; set; }
+        public DbSet<EstadisticasInmobiliaria> EstadisticasInmobiliaria { get; set; }
     }
 }

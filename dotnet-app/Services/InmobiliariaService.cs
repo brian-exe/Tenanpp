@@ -7,6 +7,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Tenanpp.Models.Queries;
 using AutoMapper;
+using Microsoft.Data.SqlClient;
 
 namespace Tenanpp.Services{
     public class InmobiliariaService : BaseService<Inmobiliaria>, IInmobiliariaService{
@@ -26,6 +27,17 @@ namespace Tenanpp.Services{
                     .Take(parameters.PageSize)
                     .OrderBy(i => i.Id)
                     .ToListAsync();
+        }
+
+        public async Task<EstadisticasInmobiliaria> GetEstadisticasInmobiliaria(long id){
+            var param = new SqlParameter("@id", id);
+            List<EstadisticasInmobiliaria> estadisticas =
+                        await _context
+                        .Set<EstadisticasInmobiliaria>()
+                            .FromSqlRaw("EstadisticasInmobiliaria @id={0}",id)
+                                .ToListAsync();
+                                
+            return estadisticas.FirstOrDefault();
         }
         // public async override Task<int> Add(Inmobiliaria entity){
         //     await _unitOfWork.Inmobiliarias.Add(entity);
