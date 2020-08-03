@@ -20,6 +20,14 @@ namespace Tenanpp.Services{
             return await _context.FotosPerfil.Where(f => f.InmobiliariaId ==id).FirstOrDefaultAsync();
         }
 
+        public async Task<List<Inmobiliaria>> GetByNombre(string nombre){
+            return await _context.Inmobiliarias
+                    .Where(x => x.Nombre
+                            .ToLower()
+                            .Contains(nombre.ToLower()))
+                    .ToListAsync();
+        }
+
         public async Task<List<Inmobiliaria>> Get(PaginationQuery parameters){
             int skip = (parameters.PageNumber - 1) * parameters.PageSize;
             return await _context.Inmobiliarias

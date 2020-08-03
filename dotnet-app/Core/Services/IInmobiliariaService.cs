@@ -10,5 +10,6 @@ namespace Tenanpp.Core.Service {
         Task<FotoPerfil> GetFoto(int id);
         Task<List<Inmobiliaria>> Get(PaginationQuery parameters);
         Task<EstadisticasInmobiliaria> GetEstadisticasInmobiliaria(long id);
+        Task<List<Inmobiliaria>> GetByNombre(string nombre);
     }
 }
