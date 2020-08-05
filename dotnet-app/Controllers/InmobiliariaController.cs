@@ -5,7 +5,9 @@ using Tenanpp.Core.Service;
 using Tenanpp.DAL.Models;
 using Tenanpp.ApiResponses;
 using Tenanpp.Models.Queries;
+using Tenanpp.Models;
 using System;
+using AutoMapper;
 
 namespace Tenanpp.Controllers
 {
@@ -14,10 +16,12 @@ namespace Tenanpp.Controllers
     public class InmobiliariaController : Controller
     {
         private readonly IInmobiliariaService _service;
+         private protected IMapper _mapper;
  
-        public InmobiliariaController(IInmobiliariaService service)
+        public InmobiliariaController(IInmobiliariaService service, IMapper mapper )
         {
             _service = service;
+            _mapper = mapper;
         }
  
         [HttpGet]
@@ -59,6 +63,21 @@ namespace Tenanpp.Controllers
             EstadisticasInmobiliaria estadisticas = await _service.GetEstadisticasInmobiliaria(id);
 
             return Ok(new OkApiResponse(estadisticas));
+        }
+
+        [HttpGet("buscar")]
+        public async Task<IActionResult> SearchInmobiliaria([FromQuery] string nombre)
+        {
+            /*En condiciones normales, nunca deberia entrar en este if*/
+            if(nombre =="" || nombre == null || nombre.Length < 3)
+                return NotFound( new NotFoundApiResponse("La entrada recibida no es válida"));
+
+            List<Inmobiliaria> inmobiliarias = await _service.GetByNombre(nombre);
+            /*if(inmobiliarias.Count <= 0)
+                return NotFound( new NotFoundApiResponse("No se encontraron resultados"));*/
+            List<InmobiliariaSearch> result = _mapper.Map<List<Inmobiliaria>,List<InmobiliariaSearch>>(inmobiliarias);
+
+            return Ok(new OkApiResponse(result));
         }
 
         protected override void Dispose(bool disposing)
