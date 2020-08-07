@@ -11,5 +11,10 @@ namespace Tenanpp.Core.Service {
         Task<List<OpinionInmobiliariaGet>> GetOpinionesInmobiliaria(long inmobiliariaId, OpinionesForInmobiliariaQuery parameters);
         Task<OpinionInmobiliaria> AddOpinionInmobiliaria(long inmobiliariaId, OpinionInmobiliariaPost model);
         Task<bool> IsPossibleToCreateANewOpinionFor(long id, string clientIpAddress);
+
+        Task<List<RankingGeneral>> GetRankingGeneral();
+        Task<List<RankingConductaEtica>> GetRankingConductaEtica();
+        Task<List<RankingResponsabilidad>> GetRankingResponsabilidad();
+        Task<List<RankingAtencion>> GetRankingAtencion();
     }
 }

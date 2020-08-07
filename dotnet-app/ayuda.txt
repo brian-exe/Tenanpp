@@ -1,0 +1,21 @@
+dotnet ef migrations add nombreMigration
+dotnet ef database update
+dotnet add package Microsoft.packageName
+
+https://localhost:5800/api/inmobiliarias/
+https://localhost:5800/api/inmobiliarias/1
+
+POST https://localhost:5800/api/opiniones/inmobiliarias/1
+{
+    "ValoracionAtencion": 1,
+    "ValoracionConductaEtica": 1,
+    "ValoracionResponsabilidad": 1,
+    "ComentarioNegativo": "Todo mal lamentablemente",
+    "ComentarioPositivo": "Todo bien afortunadamente",
+    "AceptaPagoElectronico": true
+}
+
+https://localhost:5800/api/opiniones/inmobiliarias/1?OpinionId=4
+https://localhost:5800/api/inmobiliarias/estadisticas/1
+https://localhost:5800/api/opiniones/inmobiliarias/rankings
+https://localhost:5800/api/inmobiliarias/buscar?nombre=ris

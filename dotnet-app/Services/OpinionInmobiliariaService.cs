@@ -9,6 +9,7 @@ using Tenanpp.Models.Queries;
 using Tenanpp.Models;
 using AutoMapper;
 using System;
+using Microsoft.Data.SqlClient;
 
 namespace Tenanpp.Services{
     public class OpinionInmobiliariaService : BaseService<OpinionInmobiliaria>, IOpinionInmobiliariaService{
@@ -49,6 +50,20 @@ namespace Tenanpp.Services{
             result = result.Where(o => o.FechaOpinion.DayOfYear == DateTime.Today.DayOfYear).ToList();
 
             return result.Count() == 0;
+        }
+
+
+        public async Task<List<RankingGeneral>> GetRankingGeneral(){             
+            return await _context.RankingGeneral.ToListAsync();
+        }
+        public async Task<List<RankingConductaEtica>> GetRankingConductaEtica(){
+            return await _context.RankingConductaEtica.ToListAsync();
+        }
+        public async Task<List<RankingResponsabilidad>> GetRankingResponsabilidad(){
+            return await _context.RankingResponsabilidad.ToListAsync();
+        }
+        public async Task<List<RankingAtencion>> GetRankingAtencion(){
+            return await _context.RankingAtencion.ToListAsync();
         }
     }
 }
