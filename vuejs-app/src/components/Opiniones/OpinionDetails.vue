@@ -1,6 +1,6 @@
 <template>
   <v-card dark>
-    <v-card-title class="headline">{{opinion.fechaOpinion}}</v-card-title>
+    <v-card-title style="background-color:#308cd4" class="headline">{{opinion.fechaOpinion}}</v-card-title>
 
     <v-card-subtitle color="#308cd4">{{opinion.comentarioPositivo}}</v-card-subtitle>
 
