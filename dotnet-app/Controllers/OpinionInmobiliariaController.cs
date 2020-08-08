@@ -5,7 +5,6 @@ using Tenanpp.Core.Service;
 using Tenanpp.DAL.Models;
 using Tenanpp.ApiResponses;
 using Tenanpp.Models;
-using Tenanpp.Services;
 using Tenanpp.Models.Queries;
 using AutoMapper;
 
@@ -27,6 +26,19 @@ namespace Tenanpp.Controllers
         }
 
          
+        [HttpGet("rankings")]
+        public async Task<IActionResult> GetOpinionesForInmobiliaria()
+        {
+            RankingsGet rankingsObject = new RankingsGet();
+
+            rankingsObject.RankingGeneral = await _service.GetRankingGeneral();
+            rankingsObject.RankingConductaEtica = await _service.GetRankingConductaEtica();
+            rankingsObject.RankingResponsabilidad = await _service.GetRankingResponsabilidad();
+            rankingsObject.RankingAtencion = await _service.GetRankingAtencion();
+ 
+            return Ok(new OkApiResponse(rankingsObject));
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetOpinionesForInmobiliaria(long id,[FromQuery] OpinionesForInmobiliariaQuery parameters)
         {
