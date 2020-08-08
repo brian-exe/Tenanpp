@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
 import InmobiliariasHome from '@/views/InmobiliariasHome.vue';
 import InmobiliariaDetail from '@/views/InmobiliariaDetail.vue';
 import Inmuebles from '../views/Inmuebles.vue';
@@ -10,8 +9,7 @@ Vue.use(VueRouter);
 const routes = [
     {
         path: '/',
-        name: 'Home',
-        component: Home
+        redirect: '/inmobiliarias'
     },
     {
         path: '/about',

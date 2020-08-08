@@ -12,7 +12,7 @@
           />
         </router-link>
       </div>
-      <v-tabs fixed-tabs optional>
+      <v-tabs fixed-tabs>
         <v-tab to="/inmobiliarias">Inmobiliarias</v-tab>
         <v-tab to="/inmuebles">Inmuebles</v-tab>
       </v-tabs>
