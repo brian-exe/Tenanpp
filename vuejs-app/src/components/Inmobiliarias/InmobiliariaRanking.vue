@@ -6,10 +6,14 @@
         <v-list-item-title>
           <v-card-actions>
             <v-btn @click="goToInmobiliariaDetail(item.inmobiliariaId)">
-              <strong
-                v-if="(i+1) ==1"
-              >{{i+1}} ({{item[fieldForRanking].toFixed(2)}}) {{ item.nombre }}</strong>
-              <template v-else>{{i+1}} ({{item[fieldForRanking].toFixed(2)}}) {{ item.nombre }}</template>
+              <strong v-if="(i+1) ==1">
+                <v-icon color="blue">mdi-numeric-{{i+1}}-box</v-icon>
+                ({{item[fieldForRanking].toFixed(2)}}) {{ item.nombre }}
+              </strong>
+              <template v-else>
+                <v-icon color="blue">mdi-numeric-{{i+1}}-box</v-icon>
+                ({{parseFloat(item[fieldForRanking].toFixed(2))}}) {{ item.nombre }}
+              </template>
             </v-btn>
           </v-card-actions>
         </v-list-item-title>

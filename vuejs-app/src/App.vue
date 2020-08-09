@@ -31,3 +31,9 @@ export default {
   })
 };
 </script>
+<style>
+.contentcentered {
+  align-self: center;
+  text-align: center;
+}
+</style>

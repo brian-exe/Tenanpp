@@ -11,12 +11,19 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col :cols="12" v-for="opinion in currentInmobiliariaOpiniones" :key="opinion.id">
+      <v-col :cols="7" v-for="opinion in currentInmobiliariaOpiniones" :key="opinion.id">
         <OpinionDetails :opinion="opinion"></OpinionDetails>
       </v-col>
     </v-row>
     <v-card></v-card>
-    <v-btn absolute dark bottom right rounded color="light-blue">Agregar calificación</v-btn>
+    <v-btn
+      :to="{ name: 'AddOpinion', params: { Id: id }}"
+      fixed
+      dark
+      bottom
+      right
+      color="light-blue"
+    >Agregar opinion</v-btn>
   </v-container>
 </template>
 
