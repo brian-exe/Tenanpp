@@ -73,6 +73,7 @@ export default new Vuex.Store({
                 })
                 .catch((e) => {
                     context.commit('SET_NOT_LOADING_STATUS');
+                    context.commit('SET_CURRENT_INMOBILIARIA', undefined);
                     console.log(e);
                 });
         },

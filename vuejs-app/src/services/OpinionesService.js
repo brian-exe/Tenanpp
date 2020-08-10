@@ -7,5 +7,10 @@ export default {
     },
     getRankings() {
         return Client.get(`${opinionesInmobiliarias}/rankings/`);
+    },
+    addOpinion(id, payload) {
+        return Client.post(`${opinionesInmobiliarias}/${id}`, payload, {
+            headers: { 'content-type': 'text/json' }
+        });
     }
 };

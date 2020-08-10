@@ -10,7 +10,7 @@
         <InmobiliariaHeader></InmobiliariaHeader>
       </v-col>
     </v-row>
-    <v-row>
+    <v-row v-if="currentInmobiliariaOpiniones.length >0">
       <v-col :cols="7" v-for="opinion in currentInmobiliariaOpiniones" :key="opinion.id">
         <OpinionDetails :opinion="opinion"></OpinionDetails>
       </v-col>
@@ -48,7 +48,14 @@ export default {
       "currentInmobiliariaEstadisticas"
     ])
   },
-  created() {
+  watch: {
+    currentInmobiliaria: function(value) {
+      if (!value) {
+        this.$router.push({ name: "NotFound" });
+      }
+    }
+  },
+  mounted() {
     this.$store.dispatch("getInmobiliaria", this.id);
     this.$store.dispatch("obtainOpinionesForInmobiliaria", this.id);
     this.$store.dispatch("obtainEstadisticasForInmobiliaria", this.id);

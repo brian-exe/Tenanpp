@@ -21,13 +21,13 @@
       <v-col cols="6">
         <v-card-text style="color: white;">
           <v-icon color="success" x-large>mdi-plus</v-icon>
-          {{opinion.comentarioPositivo ? opinion.comentarioPositivo : "-"}}
+          {{opinion.comentarioPositivo ? opinion.comentarioPositivo : "Sin comentario"}}
         </v-card-text>
       </v-col>
       <v-col cols="6">
         <v-card-text style="color: white;">
           <v-icon color="error" x-large>mdi-minus</v-icon>
-          {{opinion.comentarioNegativo ? opinion.comentarioNegativo : "-"}}
+          {{opinion.comentarioNegativo ? opinion.comentarioNegativo : "Sin Comentario"}}
         </v-card-text>
       </v-col>
     </v-row>
@@ -41,7 +41,6 @@
         </v-row>
         <v-row>
           <v-col cols="12">
-            ({{promedioAtencion}})
             <v-rating
               :length="length"
               dense
@@ -65,7 +64,6 @@
         </v-row>
         <v-row>
           <v-col cols="12">
-            ({{promedioResponsabilidad}})
             <v-rating
               :length="length"
               dense
@@ -89,7 +87,6 @@
         </v-row>
         <v-row>
           <v-col cols="12">
-            ({{promedioConductaEtica}})
             <v-rating
               :length="length"
               dense
@@ -111,7 +108,7 @@
       <v-divider class="mx-4"></v-divider>
     </v-row>
     <v-row>
-      <v-col cols="4">
+      <v-col cols="6">
         <v-input>Acepta pago electrónico:</v-input>
       </v-col>
       <v-col cols="2">

@@ -28,9 +28,13 @@ export default {
   props: ["inmobiliaria"],
   computed: {
     imgPath() {
-      return (
-        this.$store.getters.getPathForInmobiliariasImages + this.inmobiliaria.id
-      );
+      var path = "";
+      if (this.inmobiliaria) {
+        path =
+          this.$store.getters.getPathForInmobiliariasImages +
+          this.inmobiliaria.id;
+      }
+      return path;
     }
   }
 };
