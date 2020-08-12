@@ -41,6 +41,22 @@ namespace Tenanpp.Controllers
             return BadRequest(new InternalErrorResponse(""));
         }
 
+        [HttpPost("cerca")]
+        public async Task<IActionResult> GetLugaresCercanos([FromBody] LugarPost model){
+            List<Lugar> lugares = new List<Lugar>();
+            lugares=  await _service.GetNearLugaresTo(model);
+            
+            List<LugarPost> returnList = new List<LugarPost>();
+            foreach(Lugar lu in lugares){
+                returnList.Add(new LugarPost{
+                    Direccion = lu.Direccion,
+                    Latitude = lu.Location.Coordinate.X,
+                    Longitude = lu.Location.Coordinate.Y
+                });
+            }
+            return Ok( new OkApiResponse(returnList));
+        }
+
         [HttpPost("opiniones")]
         public async Task<IActionResult> GetOpinionesForDireccion([FromBody] OpinionLugarSearch model){
             Lugar lugar = await _service.GetByDireccion(model.Direccion);
