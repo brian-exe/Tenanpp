@@ -14,7 +14,7 @@
       </div>
       <v-tabs fixed-tabs>
         <v-tab to="/inmobiliarias">Inmobiliarias</v-tab>
-        <v-tab to="/inmuebles">Inmuebles</v-tab>
+        <v-tab to="/lugares">Lugares</v-tab>
       </v-tabs>
     </v-app-bar>
     <v-content>
@@ -28,7 +28,7 @@ export default {
   name: "App",
   data: () => ({
     //
-  })
+  }),
 };
 </script>
 <style>

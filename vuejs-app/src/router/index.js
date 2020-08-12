@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import InmobiliariasHome from '@/views/InmobiliariasHome.vue';
 import InmobiliariaDetail from '@/views/InmobiliariaDetail.vue';
-import Inmuebles from '../views/Inmuebles.vue';
+import Lugares from '../views/Lugares.vue';
 import AddOpinion from '../views/AddOpinion.vue';
 import NotFound from '@/views/NotFound.vue';
 
@@ -34,9 +34,9 @@ const routes = [
         props: true
     },
     {
-        path: '/inmuebles',
-        name: 'Inmuebles',
-        component: Inmuebles
+        path: '/lugares',
+        name: 'Lugares',
+        component: Lugares
     },
     {
         path: '/inmobiliarias/agregar-opinion/:id',
