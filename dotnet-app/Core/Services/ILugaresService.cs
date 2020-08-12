@@ -10,7 +10,7 @@ namespace Tenanpp.Core.Service {
     {
         Task<Lugar> GetByDireccion(string direccion);
         Task<Lugar> GetFromLocation(Point coord);
-        Task<List<Lugar>> GetNearLugaresTo(Point coord);
+        Task<List<Lugar>> GetNearLugaresTo(LugarPost model);
         Task<Lugar> AddLugar(LugarPost model);
     }
 }
