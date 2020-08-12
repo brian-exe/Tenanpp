@@ -1,6 +1,7 @@
 import axios from 'axios';
+import config from '@/config';
 
-const baseDomain = 'https://192.168.0.14:5800/api';
+const baseDomain = config.BASE_URL;
 const baseURL = `${baseDomain}`; // Incase of /api/v1;
 
 // ALL DEFUALT CONFIGURATION HERE

@@ -1,7 +1,7 @@
 {
     "inmobiliarias": [
         {
-            "InmobiliariaId": 1,
+            "Id": 1,
             "Nombre": "Remax",
             "Direccion": "Avellaneda 1258",
             "Telefono": "011 49681336",
@@ -10,7 +10,7 @@
             "Url": "https://www.remax.com"
         },
         {
-            "InmobiliariaId": 2,
+            "Id": 2,
             "Nombre": "Remax",
             "Direccion": "Avellaneda 1258",
             "Telefono": "011 49681336",
@@ -19,7 +19,7 @@
             "Url": "https://www.remax.com"
         },
         {
-            "InmobiliariaId": 3,
+            "Id": 3,
             "Nombre": "Remax",
             "Direccion": "Avellaneda 1258",
             "Telefono": "011 49681336",

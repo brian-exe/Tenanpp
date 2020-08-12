@@ -1,17 +1,17 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
 import InmobiliariasHome from '@/views/InmobiliariasHome.vue';
 import InmobiliariaDetail from '@/views/InmobiliariaDetail.vue';
 import Inmuebles from '../views/Inmuebles.vue';
+import AddOpinion from '../views/AddOpinion.vue';
+import NotFound from '@/views/NotFound.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
     {
         path: '/',
-        name: 'Home',
-        component: Home
+        redirect: '/inmobiliarias'
     },
     {
         path: '/about',
@@ -37,6 +37,21 @@ const routes = [
         path: '/inmuebles',
         name: 'Inmuebles',
         component: Inmuebles
+    },
+    {
+        path: '/inmobiliarias/agregar-opinion/:id',
+        name: 'AddOpinion',
+        component: AddOpinion,
+        props: true
+    },
+    {
+        path: '/not-found',
+        name: 'NotFound',
+        component: NotFound
+    },
+    {
+        path: '*',
+        redirect: '/not-found'
     }
 ];
 

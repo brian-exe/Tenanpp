@@ -1,5 +1,8 @@
 import Client from './Client';
 const resource = '/inmobiliarias';
+import config from '@/config';
+
+const baseDomain = config.BASE_URL;
 
 export default {
     // get() {
@@ -7,6 +10,12 @@ export default {
     // },
     getById(id) {
         return Client.get(`${resource}/${id}`);
+    },
+    getPathForImages() {
+        return baseDomain + resource + '/image/';
+    },
+    getEstadisticasFor(id) {
+        return Client.get(`${resource}/estadisticas/${id}`);
     },
     // create(payload) {
     //     return Client.post(`${resource}`, payload);
