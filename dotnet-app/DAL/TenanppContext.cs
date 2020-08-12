@@ -40,5 +40,7 @@ namespace Tenanpp.DAL
         public DbSet<RankingConductaEtica> RankingConductaEtica{get;set;}
         public DbSet<RankingResponsabilidad> RankingResponsabilidad{get;set;}
         public DbSet<RankingAtencion> RankingAtencion{get;set;}
+        public DbSet<Lugar> Lugares{get;set;}
+        public DbSet<OpinionLugar> OpinionesLugares { get; set; }
     }
 }

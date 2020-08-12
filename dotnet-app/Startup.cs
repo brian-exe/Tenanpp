@@ -23,9 +23,13 @@ namespace dotnet_app
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<TenanppContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:TenanppDB"]));
+            services.AddCors(c => c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
+            
+            services.AddDbContext<TenanppContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:TenanppDB"],x=> x.UseNetTopologySuite()));
             services.AddScoped<IInmobiliariaService, InmobiliariaService>();
             services.AddScoped<IOpinionInmobiliariaService, OpinionInmobiliariaService >();
+            services.AddScoped<ILugaresService, LugaresService >();
+            services.AddScoped<IOpinionLugarService, OpinionLugarService >();
             services.AddAutoMapper(typeof(Startup));
             services.AddControllers();
         }
@@ -33,6 +37,7 @@ namespace dotnet_app
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseExceptionHandler("/error/500");
             app.UseStatusCodePagesWithReExecute("/error/{0}");
 

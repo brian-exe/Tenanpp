@@ -47,24 +47,6 @@ namespace Tenanpp.Services{
                                 
             return estadisticas.FirstOrDefault();
         }
-        // public async override Task<int> Add(Inmobiliaria entity){
-        //     await _unitOfWork.Inmobiliarias.Add(entity);
-        //     return await _unitOfWork.CompleteAsync();
-        // }
-        // public async override Task<int> Delete(Inmobiliaria entity){
-        //     await _unitOfWork.Inmobiliarias.Delete(entity);
-        //     return _unitOfWork.CompleteAsync();
-        // }
-
-        // public async override Task<int> Update(Inmobiliaria dbEntity, Inmobiliaria entityForUpdate){
-        //     dbEntity.Nombre = entityForUpdate.Nombre;
-        //     dbEntity.Direccion = entityForUpdate.Direccion;
-        //     dbEntity.Localidad = entityForUpdate.Localidad;
-        //     dbEntity.Telefono = entityForUpdate.Telefono;
-        //     dbEntity.Cuit = entityForUpdate.Cuit;
-        //     dbEntity.Url = entityForUpdate.Url;
-        //     return await _unitOfWork.CompleteAsync();
-        // }
     }
 
 }

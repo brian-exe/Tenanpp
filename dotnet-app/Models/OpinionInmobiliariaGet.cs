@@ -12,5 +12,6 @@ namespace Tenanpp.Models{
         public string ComentarioPositivo { get; set; }
         public string ComentarioNegativo { get; set; }
         public bool AceptaPagoElectronico { get; set; }
+        public DateTime FechaOpinion { get; set; }
     }
 }

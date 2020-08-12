@@ -27,7 +27,7 @@ namespace Tenanpp.Controllers
 
          
         [HttpGet("rankings")]
-        public async Task<IActionResult> GetOpinionesForInmobiliaria()
+        public async Task<IActionResult> GetRankings()
         {
             RankingsGet rankingsObject = new RankingsGet();
 
