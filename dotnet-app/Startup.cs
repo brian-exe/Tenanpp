@@ -8,6 +8,7 @@ using Tenanpp.DAL;
 using Tenanpp.Core.Service;
 using Tenanpp.Services;
 using AutoMapper;
+using Newtonsoft.Json;
 
 namespace dotnet_app
 {
@@ -24,7 +25,6 @@ namespace dotnet_app
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors(c => c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
-            
             services.AddDbContext<TenanppContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:TenanppDB"],x=> x.UseNetTopologySuite()));
             services.AddScoped<IInmobiliariaService, InmobiliariaService>();
             services.AddScoped<IOpinionInmobiliariaService, OpinionInmobiliariaService >();

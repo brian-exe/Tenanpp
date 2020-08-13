@@ -7,6 +7,7 @@ namespace Tenanpp.DAL.Models{
         public long Id { get; set; }
         [ForeignKey("Inmobiliaria")]
         public long InmobiliariaId { get; set; }
+        public Inmobiliaria Inmobiliaria { get; set; }
         public string Titulo { get; set; }
         public byte[] Data { get; set; }
     }

@@ -11,8 +11,8 @@ using Tenanpp.DAL;
 namespace dotnet_app.Migrations
 {
     [DbContext(typeof(TenanppContext))]
-    [Migration("20200812041155_Lugares_Opiniones_Added")]
-    partial class Lugares_Opiniones_Added
+    [Migration("20200812224835_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -66,6 +66,8 @@ namespace dotnet_app.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("InmobiliariaId");
 
                     b.ToTable("FotosPerfil");
                 });
@@ -182,7 +184,18 @@ namespace dotnet_app.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("LugarId");
+
                     b.ToTable("OpinionesLugares");
+                });
+
+            modelBuilder.Entity("Tenanpp.DAL.Models.FotoPerfil", b =>
+                {
+                    b.HasOne("Tenanpp.DAL.Models.Inmobiliaria", "Inmobiliaria")
+                        .WithMany()
+                        .HasForeignKey("InmobiliariaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Tenanpp.DAL.Models.OpinionInmobiliaria", b =>
@@ -190,6 +203,15 @@ namespace dotnet_app.Migrations
                     b.HasOne("Tenanpp.DAL.Models.Inmobiliaria", "Inmobiliaria")
                         .WithMany()
                         .HasForeignKey("InmobiliariaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Tenanpp.DAL.Models.OpinionLugar", b =>
+                {
+                    b.HasOne("Tenanpp.DAL.Models.Lugar", "Lugar")
+                        .WithMany()
+                        .HasForeignKey("LugarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

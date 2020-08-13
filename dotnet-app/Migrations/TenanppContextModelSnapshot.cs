@@ -65,6 +65,8 @@ namespace dotnet_app.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("InmobiliariaId");
+
                     b.ToTable("FotosPerfil");
                 });
 
@@ -180,7 +182,18 @@ namespace dotnet_app.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("LugarId");
+
                     b.ToTable("OpinionesLugares");
+                });
+
+            modelBuilder.Entity("Tenanpp.DAL.Models.FotoPerfil", b =>
+                {
+                    b.HasOne("Tenanpp.DAL.Models.Inmobiliaria", "Inmobiliaria")
+                        .WithMany()
+                        .HasForeignKey("InmobiliariaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Tenanpp.DAL.Models.OpinionInmobiliaria", b =>
@@ -188,6 +201,15 @@ namespace dotnet_app.Migrations
                     b.HasOne("Tenanpp.DAL.Models.Inmobiliaria", "Inmobiliaria")
                         .WithMany()
                         .HasForeignKey("InmobiliariaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Tenanpp.DAL.Models.OpinionLugar", b =>
+                {
+                    b.HasOne("Tenanpp.DAL.Models.Lugar", "Lugar")
+                        .WithMany()
+                        .HasForeignKey("LugarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
