@@ -7,7 +7,7 @@
       <v-card>
         <v-row>
           <v-col cols="5" style="align-self: center;text-align: end">
-            <span>General ({{promedioGeneral}})</span>
+            <span>General ({{promedioGeneral ? promedioGeneral : 0}})</span>
           </v-col>
           <v-col cols="7">
             <v-rating
@@ -25,7 +25,7 @@
         </v-row>
         <v-row>
           <v-col cols="5" style="align-self: center;text-align: end">
-            <span>Pago Electronico</span>
+            <span>Pago Electrónico</span>
           </v-col>
           <v-col cols="7">
             <v-row justify="space-around">
@@ -55,11 +55,11 @@
         </v-row>
         <v-expansion-panels>
           <v-expansion-panel>
-            <v-expansion-panel-header>Mas</v-expansion-panel-header>
+            <v-expansion-panel-header>Más</v-expansion-panel-header>
             <v-expansion-panel-content>
               <v-row>
                 <v-col cols="5" style="align-self: center;text-align: end">
-                  <span>Atencion ({{promedioAtencion}})</span>
+                  <span>Atención ({{promedioAtencion ? promedioAtencion : 0}})</span>
                 </v-col>
                 <v-col cols="7">
                   <v-rating
@@ -77,7 +77,7 @@
               </v-row>
               <v-row>
                 <v-col cols="5" style="align-self: center;text-align: end">
-                  <span>Responsabilidad ({{promedioResponsabilidad}})</span>
+                  <span>Responsabilidad ({{promedioResponsabilidad ? promedioResponsabilidad : 0}})</span>
                 </v-col>
                 <v-col cols="7">
                   <v-rating
@@ -95,7 +95,7 @@
               </v-row>
               <v-row>
                 <v-col cols="5" style="align-self: center;text-align: end">
-                  <span>Conducta Etica ({{promedioConductaEtica}})</span>
+                  <span>Conducta Ética ({{promedioConductaEtica ? promedioConductaEtica : 0}})</span>
                 </v-col>
                 <v-col cols="7">
                   <v-rating
@@ -127,48 +127,67 @@ export default {
   data() {
     return {
       length: 5,
-      show: false
+      show: false,
     };
   },
   components: {
-    InmobiliariaData
+    InmobiliariaData,
   },
   computed: {
     ...mapState(["currentInmobiliaria", "currentInmobiliariaEstadisticas"]),
     promedioGeneral() {
+      if (!this.currentInmobiliariaEstadisticas) {
+        return 0;
+      }
       var result = (
         (this.currentInmobiliariaEstadisticas.promedioAtencion +
           this.currentInmobiliariaEstadisticas.promedioConductaEtica +
           this.currentInmobiliariaEstadisticas.promedioResponsabilidad) /
         3
       ).toFixed(2);
+
       return parseFloat(result);
     },
     promedioAtencion() {
-      return this.currentInmobiliariaEstadisticas.promedioAtencion;
+      if (this.currentInmobiliariaEstadisticas) {
+        return this.currentInmobiliariaEstadisticas.promedioAtencion;
+      }
+      return 0;
     },
     promedioConductaEtica() {
-      return this.currentInmobiliariaEstadisticas.promedioConductaEtica;
+      if (this.currentInmobiliariaEstadisticas) {
+        return this.currentInmobiliariaEstadisticas.promedioConductaEtica;
+      }
+      return 0;
     },
     promedioResponsabilidad() {
-      return this.currentInmobiliariaEstadisticas.promedioResponsabilidad;
+      if (this.currentInmobiliariaEstadisticas) {
+        return this.currentInmobiliariaEstadisticas.promedioResponsabilidad;
+      }
+      return 0;
     },
     votosPagoElectronico() {
-      return this.currentInmobiliariaEstadisticas.votosPagoElectronico;
+      if (this.currentInmobiliariaEstadisticas) {
+        return this.currentInmobiliariaEstadisticas.votosPagoElectronico;
+      }
+      return 0;
     },
     votosNoPagoElectronico() {
-      return this.currentInmobiliariaEstadisticas.votosNoPagoElectronico;
+      if (this.currentInmobiliariaEstadisticas) {
+        return this.currentInmobiliariaEstadisticas.votosNoPagoElectronico;
+      }
+      return 0;
     },
     porcentajeVotos() {
       return (
         (this.votosPagoElectronico * 100) /
         (this.votosPagoElectronico + this.votosNoPagoElectronico)
       );
-    }
+    },
   },
   created() {
     //this.$store.dispatch();
-  }
+  },
 };
 </script>
 

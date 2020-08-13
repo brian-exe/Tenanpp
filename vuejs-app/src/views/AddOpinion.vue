@@ -11,7 +11,7 @@
       <v-col cols="6">
         <v-card>
           <v-col>
-            <h1>Agregar opinion</h1>
+            <h1>Agregar opinión</h1>
           </v-col>
           <v-form v-model="valid">
             <v-container>
@@ -26,11 +26,11 @@
                         <template v-slot:activator="{ on, attrs }">
                           <v-icon v-on="on" v-bind="attrs">mdi-information</v-icon>
                         </template>
-                        <span>Calidad de la atencion de sus integrantes y disposicion a la resolucion de problemas</span>
+                        <span>Calidad de la atención y predisposición a la resolución de problemas.</span>
                       </v-tooltip>
                     </v-col>
                     <v-col cols="10">
-                      <v-input>Valoración Atencion</v-input>
+                      <v-input>Valoración Atención</v-input>
                     </v-col>
                   </v-row>
                 </v-col>
@@ -59,7 +59,7 @@
                         </template>
                         <span>
                           Responsabilidad por parte de la inmibiliaria
-                          a la hora hacerse cargo de los problemas e intentar solucionarlos
+                          a la hora hacerse cargo de los problemas e intentar solucionarlos.
                         </span>
                       </v-tooltip>
                     </v-col>
@@ -91,11 +91,11 @@
                         <template v-slot:activator="{ on, attrs }">
                           <v-icon v-on="on" v-bind="attrs">mdi-information</v-icon>
                         </template>
-                        <span>Conducta en la que la inmobiliaria se dirige respecto a temas legales y/o de caracter ético</span>
+                        <span>Conducta en la que la inmobiliaria se dirige respecto a temas legales y/o de caracter ético.</span>
                       </v-tooltip>
                     </v-col>
                     <v-col cols="10">
-                      <v-input>Valoración Conducta Etica</v-input>
+                      <v-input>Valoración Conducta Ética</v-input>
                     </v-col>
                   </v-row>
                 </v-col>
@@ -159,6 +159,11 @@
                   <v-btn block color="#308cd4" @click="submit">Aceptar</v-btn>
                 </v-col>
               </v-row>
+              <v-row>
+                <v-col cols="12">
+                  <v-btn block color="error" @click="goBack">Cancelar</v-btn>
+                </v-col>
+              </v-row>
             </v-container>
           </v-form>
           <v-alert
@@ -183,10 +188,10 @@ import OpinionesService from "@/services/OpinionesService";
 export default {
   props: ["id"],
   components: {
-    InmobiliariaData
+    InmobiliariaData,
   },
   computed: {
-    ...mapState(["currentInmobiliaria"])
+    ...mapState(["currentInmobiliaria"]),
   },
   data() {
     return {
@@ -204,24 +209,24 @@ export default {
       opcionesPagoElectronico: [
         {
           text: "SI",
-          value: true
+          value: true,
         },
-        { text: "NO", value: false }
+        { text: "NO", value: false },
       ],
       areaRules: [
-        v => !!v || "El campo es obligatorio",
-        v =>
+        (v) => !!v || "El campo es obligatorio",
+        (v) =>
           (v && v.length <= this.areaLength) ||
-          "No se permiten mas de " + this.areaLength + " caracteres"
-      ]
+          "No se permiten mas de " + this.areaLength + " caracteres",
+      ],
     };
   },
   watch: {
-    currentInmobiliaria: function(value) {
+    currentInmobiliaria: function (value) {
       if (!value) {
         this.$router.push({ name: "NotFound" });
       }
-    }
+    },
   },
   created() {
     this.$store.dispatch("getInmobiliaria", this.id);
@@ -235,15 +240,15 @@ export default {
           ValoracionResponsabilidad: this.ValoracionResponsabilidad,
           ComentarioNegativo: this.ComentarioNegativo,
           ComentarioPositivo: this.ComentarioPositivo,
-          AceptaPagoElectronico: this.AceptaPagoElectronico
+          AceptaPagoElectronico: this.AceptaPagoElectronico,
         };
         console.log(payload);
         OpinionesService.addOpinion(this.id, payload)
-          .then(res => {
+          .then((res) => {
             this.$router.push({ name: "Inmobiliarias" });
             console.log(res);
           })
-          .catch(err => {
+          .catch((err) => {
             console.log(err.message);
             if (err.response.data.message) {
               this.showAlert = true;
@@ -251,8 +256,12 @@ export default {
             }
           });
       }
-    }
-  }
+    },
+    goBack() {
+      //this.$router.push({ name: "Inmobiliarias" });
+      this.$router.go(-1);
+    },
+  },
 };
 </script>
 

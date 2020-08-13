@@ -3,11 +3,11 @@
     <v-row>
       <v-col cols="6">
         <v-card>
-          <v-card-title>Ingrese la direccion</v-card-title>
+          <v-card-title>Ingrese la dirección</v-card-title>
           <v-card-text>
             <gmap-autocomplete
               @place_changed="setPlace"
-              placeholder="Escriba la direccion..."
+              placeholder="Escriba la dirección..."
               style="width:100%"
             ></gmap-autocomplete>
           </v-card-text>
@@ -27,11 +27,11 @@
                   dark
                   v-bind="attrs"
                   v-on="on"
-                >Agregar opinion sobre este lugar</v-btn>
+                >Agregar opinión sobre este lugar</v-btn>
               </template>
               <v-card>
                 <v-card-title>
-                  <span class="headline">Opinion</span>
+                  <span class="headline">Opinión</span>
                 </v-card-title>
                 <v-card-text>
                   <v-container>
@@ -82,7 +82,7 @@
                         colored-border
                         type="error"
                         elevation="2"
-                      >Error, no se pudo agregar la opinion</v-alert>
+                      >Error, No se pudo agregar opinión</v-alert>
                     </v-row>
                   </v-container>
                 </v-card-text>
@@ -116,7 +116,7 @@
       </v-col>
       <v-col cols="5" v-if="!hayOpiniones && hayMarcadorSeleccionado">
         <v-card>
-          <v-card-text>No se encontraron opiniones para este lugar</v-card-text>
+          <v-card-text>No se encontraron opiniones para este lugar.</v-card-text>
         </v-card>
       </v-col>
     </v-row>
