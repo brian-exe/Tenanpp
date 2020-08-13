@@ -59,7 +59,15 @@
             <v-expansion-panel-content>
               <v-row>
                 <v-col cols="5" style="align-self: center;text-align: end">
-                  <span>Atención ({{promedioAtencion ? promedioAtencion : 0}})</span>
+                  <v-tooltip bottom>
+                    <template v-slot:activator="{ on, attrs }">
+                      <span
+                        v-on="on"
+                        v-bind="attrs"
+                      >Atención ({{promedioAtencion ? promedioAtencion : 0}})</span>
+                    </template>
+                    <span>Calidad de la atención y predisposición a la resolución de problemas.</span>
+                  </v-tooltip>
                 </v-col>
                 <v-col cols="7">
                   <v-rating
@@ -77,8 +85,17 @@
               </v-row>
               <v-row>
                 <v-col cols="5" style="align-self: center;text-align: end">
-                  <span>Responsabilidad ({{promedioResponsabilidad ? promedioResponsabilidad : 0}})</span>
+                  <v-tooltip bottom>
+                    <template v-slot:activator="{ on, attrs }">
+                      <span
+                        v-on="on"
+                        v-bind="attrs"
+                      >Responsabilidad ({{promedioResponsabilidad ? promedioResponsabilidad : 0}})</span>
+                    </template>
+                    <span>Responsabilidad por parte de la inmibiliaria a la hora hacerse cargo de los problemas e intentar solucionarlos.</span>
+                  </v-tooltip>
                 </v-col>
+
                 <v-col cols="7">
                   <v-rating
                     :length="length"
@@ -95,7 +112,15 @@
               </v-row>
               <v-row>
                 <v-col cols="5" style="align-self: center;text-align: end">
-                  <span>Conducta Ética ({{promedioConductaEtica ? promedioConductaEtica : 0}})</span>
+                  <v-tooltip bottom>
+                    <template v-slot:activator="{ on, attrs }">
+                      <span
+                        v-on="on"
+                        v-bind="attrs"
+                      >Conducta Ética ({{promedioConductaEtica ? promedioConductaEtica : 0}})</span>
+                    </template>
+                    <span>Conducta en la que la inmobiliaria se dirige respecto a temas legales y/o de caracter ético.</span>
+                  </v-tooltip>
                 </v-col>
                 <v-col cols="7">
                   <v-rating
