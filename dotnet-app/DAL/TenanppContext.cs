@@ -11,6 +11,7 @@ namespace Tenanpp.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             modelBuilder.Entity<RankingGeneral>(rg => {
                 rg.HasNoKey(); 
                 rg.ToView("RankingGeneral");
