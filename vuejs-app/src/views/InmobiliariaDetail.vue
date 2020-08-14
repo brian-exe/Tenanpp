@@ -23,7 +23,7 @@
       bottom
       right
       color="light-blue"
-    >Agregar opinion</v-btn>
+    >Agregar opinión</v-btn>
   </v-container>
 </template>
 
@@ -39,27 +39,27 @@ export default {
   components: {
     Search,
     InmobiliariaHeader,
-    OpinionDetails
+    OpinionDetails,
   },
   computed: {
     ...mapState([
       "currentInmobiliaria",
       "currentInmobiliariaOpiniones",
-      "currentInmobiliariaEstadisticas"
-    ])
+      "currentInmobiliariaEstadisticas",
+    ]),
   },
   watch: {
-    currentInmobiliaria: function(value) {
+    currentInmobiliaria: function (value) {
       if (!value) {
         this.$router.push({ name: "NotFound" });
       }
-    }
+    },
   },
   mounted() {
     this.$store.dispatch("getInmobiliaria", this.id);
     this.$store.dispatch("obtainOpinionesForInmobiliaria", this.id);
     this.$store.dispatch("obtainEstadisticasForInmobiliaria", this.id);
-  }
+  },
 };
 </script>
 
